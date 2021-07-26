@@ -25,7 +25,7 @@ server.use("/api/recipes", /*restricted,*/ RecipesRouter);
 server.use("/api/ing", /*restricted,*/ IngredientsRouter);
 server.use("/api/inst", /*restricted,*/ InstructionsRouter);
 
-server.get("/", (req, res) => {
+server.get("/api", (req, res) => {
   res.send(process.env.TEST_ENV_VARIABLE);
 });
 
