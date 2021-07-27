@@ -2,7 +2,10 @@ const router = require("express").Router();
 const Recipes = require("./recipes-model.js");
 const Ingredients = require("../ingredients/ingredients-model.js");
 const Instructions = require("../instructions/instructions-model.js");
-const { checkUserExists } = require("../middleware/middleware.js");
+const {
+  checkUserExists,
+  checkRecipeExists,
+} = require("../middleware/middleware.js");
 
 // GET - all recipes
 router.get("/", (req, res, next) => {
@@ -14,7 +17,7 @@ router.get("/", (req, res, next) => {
 });
 
 // GET -- recipes by recipe_id
-router.get("/:id", (req, res, next) => {
+router.get("/:id", checkRecipeExists, (req, res, next) => {
   const { id } = req.params;
   Recipes.findById(id)
     .then((recipe) => {
@@ -36,7 +39,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 // PUT -- update recipes by recipe_id
-router.put("/:id", (req, res, next) => {
+router.put("/:id", checkRecipeExists, (req, res, next) => {
   Recipes.update(req.params.id, req.body)
     .then((recipe) => {
       res.status(201).json(recipe);
@@ -45,7 +48,7 @@ router.put("/:id", (req, res, next) => {
 });
 
 // DELETE -- remove existing recipe by recipe_id
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", checkRecipeExists, (req, res, next) => {
   Recipes.remove(req.params.id)
     .then((recipe) => {
       res.status(201).json(recipe);
@@ -73,7 +76,7 @@ router.post("/users/:id", checkUserExists, (req, res, next) => {
 });
 
 // POST -- add ingredient to existing recipe by id
-router.post("/:id/ing", (req, res, next) => {
+router.post("/:id/ing", checkRecipeExists, (req, res, next) => {
   const newIngredient = { ...req.body, recipe_id: req.params.id };
   Ingredients.add(newIngredient)
     .then((ingredient) => {
@@ -83,7 +86,7 @@ router.post("/:id/ing", (req, res, next) => {
 });
 
 // POST -- add instruction to existing recipe by id
-router.post("/:id/inst", (req, res, next) => {
+router.post("/:id/inst", checkRecipeExists, (req, res, next) => {
   const newInstruction = { ...req.body, recipe_id: req.params.id };
   Instructions.add(newInstruction)
     .then((instruction) => {

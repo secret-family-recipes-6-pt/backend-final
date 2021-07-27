@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Users = require("./users-model.js");
+const { checkUserExists } = require("../middleware/middleware.js");
 
 // GET -- all users
 router.get("/", (req, res, next) => {
@@ -11,7 +12,7 @@ router.get("/", (req, res, next) => {
 });
 
 // GET -- user by id
-router.get("/:id", (req, res, next) => {
+router.get("/:id", checkUserExists, (req, res, next) => {
   Users.findById(req.params.id)
     .then((user) => {
       res.status(200).json(user);
@@ -23,7 +24,7 @@ router.get("/:id", (req, res, next) => {
 //doesn't the register endpoint in auth-router cover this?
 
 // PUT -- update user
-router.put("/:id", (req, res, next) => {
+router.put("/:id", checkUserExists, (req, res, next) => {
   Users.update(req.params.id)
     .then((user) => {
       res.status(200).json(user);
@@ -31,7 +32,7 @@ router.put("/:id", (req, res, next) => {
     .catch(next);
 });
 // DEL -- delete user
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", checkUserExists, (req, res, next) => {
   Users.remove(req.params.id)
     .then((deletedUser) => {
       res.status(200).json(deletedUser);
@@ -39,12 +40,4 @@ router.delete("/:id", (req, res, next) => {
     .catch(next);
 });
 
-// GET -- user by id
-router.get("/:username", (req, res, next) => {
-  Users.findByUsername(req.params.username)
-    .then((user) => {
-      res.status(200).json(user);
-    })
-    .catch(next);
-});
 module.exports = router;

@@ -3,6 +3,8 @@ const { jwtSecret } = require("../secret.js");
 const bcrypt = require("bcryptjs");
 const Users = require("../users/users-model.js");
 const Recipes = require("../recipes/recipes-model.js");
+const Ingredients = require("../ingredients/ingredients-model.js");
+const Instructions = require("../instructions/instructions-model.js");
 
 // CHECK_REGISTRATION_CREDENTIALS -- upon registration hashes password and checks that username is unique
 const checkRegistrationCredentials = (req, res, next) => {
@@ -77,12 +79,55 @@ const restricted = (req, res, next) => {
   }
 };
 
+// Check_User_Exists -- checks by Id to see if User exists in database
 const checkUserExists = (req, res, next) => {
   // look for existence of user with given id
   Users.findById(req.params.id)
     .then((user) => {
       if (!user) {
         res.json({ message: "I'm not a hater, but that user doesn't exist" });
+      } else {
+        next();
+      }
+    })
+    .catch(next);
+};
+
+// Check_Recipe_Exists -- checks by Id to see if Recipe exists in database
+const checkRecipeExists = (req, res, next) => {
+  // look for existence of recipe with given id
+  Recipes.findById(req.params.id)
+    .then((recipe) => {
+      if (!recipe) {
+        res.json({ message: "Hmmmm, I cannot find that recipe" });
+      } else {
+        next();
+      }
+    })
+    .catch(next);
+};
+
+// Check_Instruction_Exists -- checks by Id to see if Instruction exists in database
+const checkInstructionExists = (req, res, next) => {
+  // look for existence of instruction with given id
+  Instructions.findById(req.params.id)
+    .then((instruction) => {
+      if (!instruction) {
+        res.json({ message: "Hmmmm, I cannot find that step!" });
+      } else {
+        next();
+      }
+    })
+    .catch(next);
+};
+
+// Check_Ingredient_Exists -- checks by Id to see if Ingredient exists in database
+const checkIngredientExists = (req, res, next) => {
+  // look for existence of ingredient with given id
+  Ingredients.findById(req.params.id)
+    .then((ingredient) => {
+      if (!ingredient) {
+        res.json({ message: "Hmmmm, I cannot find that ingredient!" });
       } else {
         next();
       }
@@ -97,4 +142,7 @@ module.exports = {
   makeToken,
   restricted,
   checkUserExists,
+  checkRecipeExists,
+  checkInstructionExists,
+  checkIngredientExists,
 };

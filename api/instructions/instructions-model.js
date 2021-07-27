@@ -28,7 +28,7 @@ const remove = async (id) => {
   const [deletedInstruction] = await db("instructions")
     .where("id", id)
     .del("*");
-  return deletedInstruction;
+  return `I got rid of step ${deletedInstruction.step_number}`;
 };
 
 module.exports = {

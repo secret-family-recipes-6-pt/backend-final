@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Instructions = require("./instructions-model.js");
+const { checkInstructionExists } = require("../middleware/middleware.js");
 
 // GET -- list all instructions along with their instruction_id
 router.get("/", (req, res, next) => {
@@ -11,7 +12,7 @@ router.get("/", (req, res, next) => {
 });
 
 // GET -- instruction by id
-router.get("/:id", (req, res, next) => {
+router.get("/:id", checkInstructionExists, (req, res, next) => {
   Instructions.findById(req.params.id)
     .then((instruction) => {
       res.status(200).json(instruction);
@@ -20,7 +21,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 // PUT -- update existing instruction by id
-router.put("/:id", (req, res, next) => {
+router.put("/:id", checkInstructionExists, (req, res, next) => {
   Instructions.update(req.params.id, req.body)
     .then((instruction) => {
       res.status(201).json(instruction);
@@ -29,7 +30,7 @@ router.put("/:id", (req, res, next) => {
 });
 
 // DEL -- remove existing instruction by id
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", checkInstructionExists, (req, res, next) => {
   Instructions.remove(req.params.id)
     .then((instruction) => {
       res.status(200).json(instruction);

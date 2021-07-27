@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Ingredients = require("./ingredients-model.js");
+const { checkIngredientExists } = require("../middleware/middleware.js");
 
 // GET -- list all ingredients along with their ingredient_id
 router.get("/", (req, res, next) => {
@@ -11,7 +12,7 @@ router.get("/", (req, res, next) => {
 });
 
 // GET -- ingredient for given id
-router.get("/:id", (req, res, next) => {
+router.get("/:id", checkIngredientExists, (req, res, next) => {
   Ingredients.findById(req.params.id)
     .then((ingredient) => {
       res.status(200).json(ingredient);
@@ -20,7 +21,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 // PUT -- update existing ingredient by id
-router.put("/:id", (req, res, next) => {
+router.put("/:id", checkIngredientExists, (req, res, next) => {
   Ingredients.update(req.params.id, req.body)
     .then((ingredient) => {
       res.status(201).json(ingredient);
@@ -29,7 +30,7 @@ router.put("/:id", (req, res, next) => {
 });
 
 // DEL -- remove existing ingredient by id
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", checkIngredientExists, (req, res, next) => {
   Ingredients.remove(req.params.id)
     .then((ingredient) => {
       res.status(200).json(ingredient);

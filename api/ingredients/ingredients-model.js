@@ -26,7 +26,7 @@ const update = async (id, ingredient) => {
 
 const remove = async (id) => {
   const [deletedIngredient] = await db("ingredients").where("id", id).del("*");
-  return deletedIngredient;
+  return `You just deleted ${deletedIngredient.ingredient_name}`;
 };
 
 module.exports = {
