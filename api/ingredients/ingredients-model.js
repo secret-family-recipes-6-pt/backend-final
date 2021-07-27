@@ -18,7 +18,7 @@ const add = async (ingredient) => {
 };
 
 const update = async (id, ingredient) => {
-  const [updatedIngredient] = await db("ingredients")
+  const [updatedIngredient] = await db("ingredients", "*")
     .where("id", id)
     .update(ingredient, "*");
   return findByRecipeId(updatedIngredient.recipe_id);

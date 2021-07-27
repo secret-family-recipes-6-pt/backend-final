@@ -12,8 +12,7 @@ router.get("/", (req, res, next) => {
 
 // GET -- instruction by id
 router.get("/:id", (req, res, next) => {
-  const { id } = req.params;
-  Instructions.findById(id)
+  Instructions.findById(req.params.id)
     .then((instruction) => {
       res.status(200).json(instruction);
     })

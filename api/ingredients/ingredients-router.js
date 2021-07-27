@@ -12,8 +12,7 @@ router.get("/", (req, res, next) => {
 
 // GET -- ingredient for given id
 router.get("/:id", (req, res, next) => {
-  const { id } = req.params;
-  Ingredients.findById(id)
+  Ingredients.findById(req.params.id)
     .then((ingredient) => {
       res.status(200).json(ingredient);
     })
