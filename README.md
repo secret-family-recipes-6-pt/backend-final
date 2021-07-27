@@ -45,5 +45,5 @@
 | ---- | -------------- | ----------------------------------------- | --------- | ------------- | -------------------------------- |
 | GET  | /api/users/    | Get all Users                             | Yes       | nothing       |
 | GET  | /api/users/:id | Get all Users by user_id                  | Yes       | valid user_id | (nothing returns on invalid id)  |
-| xPUT | /api/users/:id | Update an existing Instruction by user_id | Yes       | valid user_id |
-| DEL  | /api/users/:id | Remove an existing Instruction by user_id | Yes       | valid user_id | (empty array if user_id invalid) |
+| xPUT | /api/users/:id | Update an existing user by user_id | Yes       | valid user_id |
+| DEL  | /api/users/:id | Remove an existing user by user_id | Yes       | valid user_id | (empty array if user_id invalid) |
