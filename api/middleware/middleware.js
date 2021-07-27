@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const { jwtSecret } = require("../secret.js");
 const bcrypt = require("bcryptjs");
 const Users = require("../users/users-model.js");
+const Recipes = require("../recipes/recipes-model.js");
 
 // CHECK_REGISTRATION_CREDENTIALS -- upon registration hashes password and checks that username is unique
 const checkRegistrationCredentials = (req, res, next) => {
@@ -76,10 +77,24 @@ const restricted = (req, res, next) => {
   }
 };
 
+const isUserIdValid = (req, res, next) => {
+  // look for existence of user with given id
+  Recipes.findByUserId(req.params.id)
+    .then((recipe) => {
+      if (!recipe) {
+        res.json({ message: "I'm not a hater, but that user doesn't exist" });
+      } else {
+        next();
+      }
+    })
+    .catch(next);
+};
+
 module.exports = {
   checkRegistrationFields,
   checkRegistrationCredentials,
   checkIfUsernameExists,
   makeToken,
   restricted,
+  isUserIdValid,
 };

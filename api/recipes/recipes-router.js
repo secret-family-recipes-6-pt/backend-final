@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Recipes = require("./recipes-model.js");
 const Ingredients = require("../ingredients/ingredients-model.js");
 const Instructions = require("../instructions/instructions-model.js");
+const { isUserIdValid } = require("../middleware/middleware.js");
 
 // GET - all recipes
 router.get("/", (req, res, next) => {
@@ -53,7 +54,7 @@ router.delete("/:id", (req, res, next) => {
 });
 
 //GET -- recipes by user_id
-router.get("/users/:id", (req, res, next) => {
+router.get("/users/:id", isUserIdValid, (req, res, next) => {
   Recipes.findByUserId(req.params.id)
     .then((recipes) => {
       res.status(200).json(recipes);
@@ -62,7 +63,7 @@ router.get("/users/:id", (req, res, next) => {
 });
 
 // POST -- add new recipe by user_id
-router.post("/users/:id", (req, res, next) => {
+router.post("/users/:id", isUserIdValid, (req, res, next) => {
   const newRecipe = { ...req.body, user_id: req.params.id };
   Recipes.add(newRecipe)
     .then((recipe) => {
