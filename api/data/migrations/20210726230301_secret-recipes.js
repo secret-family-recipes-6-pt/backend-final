@@ -1,3 +1,5 @@
+const { blue } = require("chalk");
+
 exports.up = function (knex) {
   return knex.schema
     .createTable("users", (tbl) => {
@@ -7,11 +9,24 @@ exports.up = function (knex) {
       tbl.string("email", 128).notNullable();
     })
 
+    .createTable("categories", (tbl) => {
+      tbl.increments();
+      tbl.string("category_name").notNullable();
+    })
+
     .createTable("recipes", (tbl) => {
       tbl.increments();
       tbl.string("recipe_name", 128).notNullable();
       tbl.string("recipe_source", 256);
-      tbl.string("category_name");
+      tbl.string("description");
+      tbl
+        .integer("category_id")
+        .unsigned()
+        .notNullable()
+        .references("id")
+        .inTable("categories")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
       tbl
         .integer("user_id")
         .unsigned()
@@ -56,5 +71,6 @@ exports.down = function (knex) {
     .dropTableIfExists("instructions")
     .dropTableIfExists("ingredients")
     .dropTableIfExists("recipes")
+    .dropTableIfExists("categories")
     .dropTableIfExists("users");
 };
