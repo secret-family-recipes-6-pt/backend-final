@@ -25,10 +25,6 @@ server.use("/api/recipes", /*restricted,*/ RecipesRouter);
 server.use("/api/ing", /*restricted,*/ IngredientsRouter);
 server.use("/api/inst", /*restricted,*/ InstructionsRouter);
 
-server.get("/api", (req, res) => {
-  res.send(process.env.TEST_ENV_VARIABLE);
-});
-
 // CATCH ALL
 // server.use((err, req, res) => {
 //   res.status(err.status || 500).json({
