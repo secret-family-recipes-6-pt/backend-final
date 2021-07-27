@@ -5,7 +5,7 @@ const server = require("./api/server.js");
 const port = process.env.PORT;
 
 server.get("/api", (req, res) => {
-  res.send(process.env.TEST_ENV_VARIABLE);
+  res.status(200).json({ message: "Server is running" });
 });
 
 server.listen(port, () => {
