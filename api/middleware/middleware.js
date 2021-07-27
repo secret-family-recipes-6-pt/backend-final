@@ -77,11 +77,11 @@ const restricted = (req, res, next) => {
   }
 };
 
-const isUserIdValid = (req, res, next) => {
+const checkUserExists = (req, res, next) => {
   // look for existence of user with given id
-  Recipes.findByUserId(req.params.id)
-    .then((recipe) => {
-      if (!recipe) {
+  Users.findById(req.params.id)
+    .then((user) => {
+      if (!user) {
         res.json({ message: "I'm not a hater, but that user doesn't exist" });
       } else {
         next();
@@ -96,5 +96,5 @@ module.exports = {
   checkIfUsernameExists,
   makeToken,
   restricted,
-  isUserIdValid,
+  checkUserExists,
 };
