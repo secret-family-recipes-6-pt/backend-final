@@ -1,5 +1,3 @@
-const { blue } = require("chalk");
-
 exports.up = function (knex) {
   return knex.schema
     .createTable("users", (tbl) => {
