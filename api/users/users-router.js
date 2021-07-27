@@ -31,7 +31,7 @@ router.put("/:id", (req, res, next) => {
     .catch(next);
 });
 // DEL -- delete user
-router.delete("./:id", (req, res, next) => {
+router.delete("/:id", (req, res, next) => {
   Users.remove(req.params.id)
     .then((deletedUser) => {
       res.status(200).json(deletedUser);

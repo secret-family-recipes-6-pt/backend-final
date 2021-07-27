@@ -5,11 +5,11 @@ const findAll = () => {
 };
 
 const findById = (id) => {
-  return db("instructions").where("id", id);
+  return db("instructions").where("id", id).first();
 };
 
 const findByRecipeId = async (recipe_id) => {
-  return db("instructions").where("recipe_id", recipe_id);
+  return db("instructions").where("recipe_id", recipe_id).first();
 };
 
 const add = async (instruction) => {

@@ -9,7 +9,7 @@ const findById = (id) => {
 };
 
 const findByUserId = (user_id) => {
-  return db("recipes").where("user_id", user_id);
+  return db("recipes").where("user_id", user_id).first();
 };
 
 const add = async (recipe) => {
