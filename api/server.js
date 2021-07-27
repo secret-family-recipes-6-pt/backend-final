@@ -10,7 +10,7 @@ const RecipesRouter = require("./recipes/recipes-router.js");
 const AuthRouter = require("./auth/auth-router.js");
 const IngredientsRouter = require("./ingredients/ingredients-router.js");
 const InstructionsRouter = require("./instructions/instructions-router.js");
-const { restricted } = require("./middleware.js");
+// const { restricted } = require("./middleware.js");
 
 const server = express();
 
