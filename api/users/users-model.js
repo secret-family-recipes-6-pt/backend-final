@@ -7,6 +7,7 @@ const findAll = () => {
 const findById = (id) => {
   return db("users").where("id", id).first();
 };
+// .select("id", "username", "email")
 
 const findByUsername = (username) => {
   return db("users").where("username", username).first();
@@ -19,12 +20,11 @@ const add = async (user) => {
 
 const update = async (user) => {
   const updatedUser = await db("users").update(user, "*");
-  return findById(updatedUser.id);
+  return updatedUser;
 };
 
 const remove = async (id) => {
-  const deletedUser = await db("users").where("id", id).del("*");
-  return findById(deletedUser.id);
+  return db("users").where("id", id).del("*");
 };
 
 module.exports = {

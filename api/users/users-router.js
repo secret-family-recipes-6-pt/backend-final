@@ -38,4 +38,13 @@ router.delete("/:id", (req, res, next) => {
     })
     .catch(next);
 });
+
+// GET -- user by id
+router.get("/:username", (req, res, next) => {
+  Users.findByUsername(req.params.username)
+    .then((user) => {
+      res.status(200).json(user);
+    })
+    .catch(next);
+});
 module.exports = router;

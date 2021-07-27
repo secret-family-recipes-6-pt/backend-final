@@ -1,11 +1,13 @@
 # Base URL: https://secret-family-recipes6.herokuapp.com
 
+## SAMPLE LOGIN CREDENTIALS: username: cBoyardee password: 12345 - both username and password should be a "string"
+
 ## Login and Register
 
-| Type  | Endpoint             | Description         | Protected |
-| ----- | -------------------- | ------------------- | --------- |
-| xPOST | "/api/auth/register" | Create new user     | No        |
-| xPOST | "/api/auth/login"    | Login existing user | No        |
+| Type  | Endpoint           | Description         | Protected |
+| ----- | ------------------ | ------------------- | --------- |
+| xPOST | /api/auth/register | Create new user     | No        |
+| POST  | /api/auth/login    | Login existing user | No        |
 
 ### Token is required for all endpoints listed below
 
@@ -41,9 +43,10 @@
 
 ## users
 
-| Type | Endpoint        | Description                        | Protected |
-| ---- | --------------- | ---------------------------------- | --------- |
-| GET  | /api/users/     | Get all Users                      | Yes       |
-| GET  | /api/users/:id  | Get all Users by user_id           | Yes       |
-| xPUT | x/api/users/:id | Update an existing User by user_id | Yes       |
-| xDEL | x/api/users/:id | Remove an existing User by user_id | Yes       |
+| Type | Endpoint            | Description                        | Protected |
+| ---- | ------------------- | ---------------------------------- | --------- |
+| GET  | /api/users/         | Get all Users                      | Yes       |
+| GET  | /api/users/:id      | Get all Users by user_id           | Yes       |
+| xPUT | /api/users/:id      | Update an existing User by user_id | Yes       |
+| DEL  | /api/users/:id      | Remove an existing User by user_id | Yes       |
+| xGET | /api/users/username | Get all Users by user_id           | Yes       |
