@@ -9,11 +9,11 @@ const findById = (id) => {
 };
 
 const findByRecipeId = async (recipe_id) => {
-  return db("instructions").where("recipe_id", recipe_id).first();
+  return db("instructions").where("recipe_id", recipe_id);
 };
 
 const add = async (instruction) => {
-  const [newInstruction] = await db("instructions").insert(instruction);
+  const [newInstruction] = await db("instructions").insert(instruction, "*");
   return findByRecipeId(newInstruction.recipe_id);
 };
 

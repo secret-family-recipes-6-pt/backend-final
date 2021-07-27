@@ -14,12 +14,12 @@ const findByUsername = (username) => {
 };
 
 const add = async (user) => {
-  const [newUser] = await db("users").insert(user);
+  const [newUser] = await db("users").insert(user, "*");
   return newUser;
 };
 
-const update = async (user) => {
-  const updatedUser = await db("users").update(user, "*");
+const update = async (id, user) => {
+  const [updatedUser] = await db("users").where("id", id).update(user, "*");
   return updatedUser;
 };
 

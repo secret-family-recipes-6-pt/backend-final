@@ -4,24 +4,24 @@
 
 ## Login and Register
 
-| Type  | Endpoint           | Description         | Protected |
-| ----- | ------------------ | ------------------- | --------- |
-| xPOST | /api/auth/register | Create new user     | No        |
-| POST  | /api/auth/login    | Login existing user | No        |
+| Type | Endpoint           | Description         | Protected |
+| ---- | ------------------ | ------------------- | --------- |
+| POST | /api/auth/register | Create new user     | No        |
+| POST | /api/auth/login    | Login existing user | No        |
 
 ### Token is required for all endpoints listed below
 
 ## recipes
 
-| Type  | Endpoint               | Description                                 | Protected |
-| ----- | ---------------------- | ------------------------------------------- | --------- |
-| GET   | /api/recipes/:id       | Fetch one Recipe by recipe_id               | Yes       |
-| PUT   | /api/recipes/:id       | Update a Recipe by recipe_id                | Yes       |
-| DEL   | /api/recipes/:id       | Delete a Recipe by recipe_id                | Yes       |
-| GET   | /api/recipes/users/:id | Fetch all Recipes by user_id                | Yes       |
-| xPOST | /api/recipes/users/:id | Add a new user Recipe by user_id            | Yes       |
-| xPOST | /api/recipes/:id/inst  | Add an Instruction to a Recipe by recipe_id | Yes       |
-| xPOST | /api/recipes/:id/ing   | Add an ingredient to a Recipe by recipe_id  | Yes       |
+| Type | Endpoint               | Description                                 | Protected |
+| ---- | ---------------------- | ------------------------------------------- | --------- |
+| GET  | /api/recipes/:id       | Fetch one Recipe by recipe_id               | Yes       |
+| PUT  | /api/recipes/:id       | Update a Recipe by recipe_id                | Yes       |
+| DEL  | /api/recipes/:id       | Delete a Recipe by recipe_id                | Yes       |
+| GET  | /api/recipes/users/:id | Fetch all Recipes by user_id                | Yes       |
+| POST | /api/recipes/users/:id | Add a new user Recipe by user_id            | Yes       |
+| POST | /api/recipes/:id/inst  | Add an Instruction to a Recipe by recipe_id | Yes       |
+| POST | /api/recipes/:id/ing   | Add an ingredient to a Recipe by recipe_id  | Yes       |
 
 ## ingredients
 
@@ -43,10 +43,9 @@
 
 ## users
 
-| Type | Endpoint            | Description                        | Protected |
-| ---- | ------------------- | ---------------------------------- | --------- |
-| GET  | /api/users/         | Get all Users                      | Yes       |
-| GET  | /api/users/:id      | Get all Users by user_id           | Yes       |
-| xPUT | /api/users/:id      | Update an existing User by user_id | Yes       |
-| DEL  | /api/users/:id      | Remove an existing User by user_id | Yes       |
-| xGET | /api/users/username | Get all Users by user_id           | Yes       |
+| Type | Endpoint       | Description                        | Protected |
+| ---- | -------------- | ---------------------------------- | --------- |
+| GET  | /api/users/    | Get all Users                      | Yes       |
+| GET  | /api/users/:id | Get all Users by user_id           | Yes       |
+| xPUT | /api/users/:id | Update an existing User by user_id | Yes       |
+| DEL  | /api/users/:id | Remove an existing User by user_id | Yes       |

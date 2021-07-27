@@ -6,7 +6,7 @@ const {
   checkRegistrationCredentials,
   checkIfUsernameExists,
   makeToken,
-} = require("../middleware.js");
+} = require("../middleware/middleware.js");
 
 // POST -- registers new user
 router.post(
@@ -20,7 +20,7 @@ router.post(
       .then((newUser) => {
         const token = makeToken(newUser);
         res.status(201).json({
-          message: `Welcome aboard ${user.username}`,
+          message: `Welcome aboard ${user.username}...fa' shizzle, dizzle`,
           token,
         });
       })
@@ -37,7 +37,7 @@ router.post("/login", checkIfUsernameExists, (req, res, next) => {
       if (savedUser && bcrypt.compareSync(user.password, savedUser.password)) {
         const token = makeToken(savedUser);
         res.status(200).json({
-          message: `Welcome back ${savedUser.username}`,
+          message: `${savedUser.username} is back...time to celebrate!`,
           token,
         });
       } else {

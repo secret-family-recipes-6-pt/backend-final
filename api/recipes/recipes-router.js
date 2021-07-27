@@ -63,7 +63,7 @@ router.get("/users/:id", (req, res, next) => {
 
 // POST -- add new recipe by user_id
 router.post("/users/:id", (req, res, next) => {
-  const newRecipe = { ...req.body, user_id: req.params.user_id };
+  const newRecipe = { ...req.body, user_id: req.params.id };
   Recipes.add(newRecipe)
     .then((recipe) => {
       res.status(201).json(recipe);
@@ -74,7 +74,7 @@ router.post("/users/:id", (req, res, next) => {
 // POST -- add ingredient to existing recipe by id
 router.post("/:id/ing", (req, res, next) => {
   const newIngredient = { ...req.body, recipe_id: req.params.id };
-  Recipes.add(newIngredient)
+  Ingredients.add(newIngredient)
     .then((ingredient) => {
       res.status(201).json(ingredient);
     })

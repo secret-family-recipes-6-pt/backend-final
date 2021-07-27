@@ -9,12 +9,12 @@ const findById = (id) => {
 };
 
 const findByUserId = (user_id) => {
-  return db("recipes").where("user_id", user_id).first();
+  return db("recipes").where("user_id", user_id);
 };
 
 const add = async (recipe) => {
-  const [newRecipe] = await db("recipes").insert(recipe);
-  return findByUserId(newRecipe.user_id);
+  const [newRecipe] = await db("recipes").insert(recipe, "*");
+  return newRecipe;
 };
 
 const update = async (id, recipe) => {

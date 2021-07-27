@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
-const { jwtSecret } = require("./secret.js");
+const { jwtSecret } = require("../secret.js");
 const bcrypt = require("bcryptjs");
-const Users = require("./users/users-model.js");
+const Users = require("../users/users-model.js");
 
 // CHECK_REGISTRATION_CREDENTIALS -- upon registration hashes password and checks that username is unique
 const checkRegistrationCredentials = (req, res, next) => {
@@ -26,7 +26,7 @@ const checkRegistrationCredentials = (req, res, next) => {
 const checkRegistrationFields = (req, res, next) => {
   let user = req.body;
   if (!user.username || !user.password || !user.email) {
-    res.status(401).json("All fields are required");
+    res.status(401).json("Now you know all fields are required!");
   } else {
     next();
   }
@@ -34,14 +34,13 @@ const checkRegistrationFields = (req, res, next) => {
 
 // CHECK_IF_USERNAME_EXISTS
 const checkIfUsernameExists = (req, res, next) => {
-  let user = req.body;
   // look for existence of user with given username
-  Users.findByUsername(user.username)
+  Users.findByUsername(req.body.username)
     .then((savedUser) => {
       if (savedUser) {
         next();
       } else {
-        res.status(401).json("Username not found");
+        res.status(401).json("Invalid credentials, playa");
       }
     })
     .catch(next);
@@ -64,11 +63,11 @@ const makeToken = (user) => {
 const restricted = (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
-    res.status(401).json("Token required");
+    res.status(401).json("Hold on...you need a token");
   } else {
     jwt.verify(token, jwtSecret, (err, decodedToken) => {
       if (err) {
-        res.status(403).json("Token is invalid " + err.message);
+        res.status(403).json("Oh no! Your token is invalid " + err.message);
       } else {
         req.decodedToken = decodedToken;
         next();

@@ -10,7 +10,7 @@ const RecipesRouter = require("./recipes/recipes-router.js");
 const AuthRouter = require("./auth/auth-router.js");
 const IngredientsRouter = require("./ingredients/ingredients-router.js");
 const InstructionsRouter = require("./instructions/instructions-router.js");
-const { restricted } = require("./middleware.js");
+const { restricted } = require("./middleware/middleware.js");
 
 const server = express();
 
@@ -20,10 +20,10 @@ server.use(cors());
 
 // ENDPOINTS
 server.use("/api/auth", AuthRouter);
-server.use("/api/users", /*restricted,*/ UsersRouter);
-server.use("/api/recipes", /*restricted,*/ RecipesRouter);
-server.use("/api/ing", /*restricted,*/ IngredientsRouter);
-server.use("/api/inst", /*restricted,*/ InstructionsRouter);
+server.use("/api/users", restricted, UsersRouter);
+server.use("/api/recipes", restricted, RecipesRouter);
+server.use("/api/ing", restricted, IngredientsRouter);
+server.use("/api/inst", restricted, InstructionsRouter);
 
 // CATCH ALL
 // server.use((err, req, res) => {
