@@ -1,7 +1,9 @@
 const db = require("../data/db-config.js");
 
 const findAll = () => {
-  return db("recipes");
+  return db("recipes as r")
+    .join("categories as c", "c.id", "r.category_id")
+    .select("*");
 };
 
 const findById = (id) => {

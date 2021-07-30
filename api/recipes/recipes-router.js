@@ -16,6 +16,35 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
+// router.get("/", (req, res, next) => {
+//   Recipes.findAll()
+//     .then((recipes) => {
+//       // let recipesArray = recipes.map((recipe) => {
+//       //   return recipe;
+//       // });
+//       recipes.map((recipe) => {
+//         Recipes.findById(recipe.id)
+//           .then((recipe) => {
+//             Ingredients.findByRecipeId(recipe.id)
+//               .then((ingredients) => {
+//                 Instructions.findByRecipeId(recipe.id)
+//                   .then((instructions) => {
+//                     res.status(200).json({
+//                       ...recipe,
+//                       ingredients: ingredients,
+//                       instructions: instructions,
+//                     });
+//                   })
+//                   .catch(next);
+//               })
+//               .catch(next);
+//           })
+//           .catch(next);
+//       });
+//     })
+//     .catch(next);
+// });
+
 // GET -- recipes by recipe_id
 router.get("/:id", checkRecipeExists, (req, res, next) => {
   const { id } = req.params;
